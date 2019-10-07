@@ -4,7 +4,9 @@ async function promiseReduce(asyncFunctions, reduce, initialValue) {
   let current = it.next();
 
   while (!current.done) {
-    result = reduce(await current.value(), result)
+    let currentValue = await current.value();
+
+    result = reduce(result, currentValue);
     current = it.next();
   }
 
