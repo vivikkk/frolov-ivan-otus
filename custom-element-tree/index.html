@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="main.js"></script>
+	<title>Custom Element Tree</title>
+</head>
+
+<body>
+	<my-tree data-tree='{
+		"id": 1,
+		"items": [{
+			"id": 2,
+			"items": [
+				{"id": 3},
+				{
+					"id": 4,
+					"items": [
+						{"id": 5},
+						{
+							"id": 6,
+							"items": [
+								{"id": 7},
+								{"id": 8},
+								{"id": 9}
+							]
+						},
+						{"id": 10}
+					]
+				},
+				{"id": 11}
+			]
+		}]
+	}'></my-tree>
+</body>
+
+</html>
