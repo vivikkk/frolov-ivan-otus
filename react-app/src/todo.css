@@ -1,0 +1,24 @@
+.todo {
+	height: calc(100vh - 180px)
+}
+.todo__item {
+	display: flex;
+	padding: 10px 20px;
+	border-bottom: 1px solid rgba(34, 34, 34, 0.21);
+}
+
+.todo__item label {
+	height: 25px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.checkmark {
+	margin-left: 5px;
+}
+
+.completed span {
+	text-decoration: line-through;
+	opacity: .4;
+}
