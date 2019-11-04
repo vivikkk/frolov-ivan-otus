@@ -7,6 +7,14 @@
 	border-bottom: 1px solid rgba(34, 34, 34, 0.21);
 }
 
+.todo__item_completed {
+	opacity: .5;
+}
+
+.todo__item_completed .checkmark {
+	text-decoration: line-through;
+}
+
 .todo__item label {
 	height: 25px;
 	display: flex;

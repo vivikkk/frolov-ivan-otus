@@ -1,13 +1,10 @@
 import React from 'react';
 import Checkbox from './Checkbox'
-import '../todo.css';
+import '../styles/todo.css';
 
-const Todo = (props) => {
-  return (
-    <div className="todo__item">
-      <Checkbox title={props.title}/>
-    </div>
-  );
-};
+const Todo = (props) =>
+  <div className={`todo__item ${props.checked ? 'todo__item_completed' : ''}`}>
+    <Checkbox title={props.title} checked={props.checked ? true : false}/>
+  </div>;
 
 export default Todo;

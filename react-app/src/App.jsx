@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './components/Header';
 import Todo from './components/Todo';
 import AddTask from './components/AddTask';
-import './todo.css';
+import './styles/todo.css';
 
 const App = (props) => {
   return (
@@ -11,10 +11,11 @@ const App = (props) => {
       <Header title={props.title} />
 
       <section className="todo">
-        <Todo title={"Моя первая задача"}/>
-        <Todo title={"Моя вторая задача"}/>
-        <Todo title={"Моя третья задача"}/>
+        {props.todos.map(
+          todo => <Todo key ={todo.id} title={todo.title} checked={todo.checked}/>
+        )}
       </section>
+
       <AddTask />
     </main>
   );

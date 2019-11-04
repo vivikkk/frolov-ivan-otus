@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import App from './App';
 import './test';
-import './main.css';
+import './styles/main.css';
+import todos from './todos';
 
-render(<App title="TO DO APP" />, document.getElementById('root'));
+render(<App todos={todos} title="TO DO APP" />, document.getElementById('root'));
