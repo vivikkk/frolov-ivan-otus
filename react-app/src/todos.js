@@ -12,7 +12,7 @@ const todos = [
   {
     id: 3,
     title: 'Мое третье задание',
-    checked: true,
+    checked: false,
   },
 ];
 

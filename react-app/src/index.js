@@ -5,4 +5,4 @@ import './test';
 import './styles/main.css';
 import todos from './todos';
 
-render(<App todos={todos} title="TO DO APP" />, document.getElementById('root'));
+render(<App initialData={todos} title="TO DO APP" />, document.getElementById('root'));
