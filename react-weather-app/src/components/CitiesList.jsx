@@ -1,6 +1,7 @@
 import React from 'react';
 import City from './City';
 import Input from './Input';
+import PropTypes from 'prop-types';
 
 class CitiesList extends React.Component {
   constructor(props) {
@@ -25,15 +26,11 @@ class CitiesList extends React.Component {
   }
 
   favoriteStatusChange(id) {
-    let cities = this.state.cities.map(city => {
-      if (city.id === id) {
-        city.isFavorite = !city.isFavorite;
-      }
+    const cities = this.state.cities;
+    const currentCity = cities.find(city => city.id === id);
 
-      return city;
-    });
-
-    this.setState({cities});
+    currentCity.isFavorite = !currentCity.isFavorite;
+    this.setState({ cities });
   }
 
   searhChange(event) {
@@ -42,7 +39,7 @@ class CitiesList extends React.Component {
       return item.name.toLowerCase().includes(searchInput.toLowerCase())
     });
 
-    this.setState({cities});
+    this.setState({ cities });
   }
 
   render() {
@@ -56,8 +53,8 @@ class CitiesList extends React.Component {
           return(
             <City
               key={city.id}
-              city={city}
               onFavoriteStatusChange={this.favoriteStatusChange}
+              {...city}
             />
           );
         })}
@@ -65,5 +62,9 @@ class CitiesList extends React.Component {
     );
   }
 }
+
+CitiesList.propTypes = {
+  cities: PropTypes.array.isRequired
+};
 
 export default CitiesList;

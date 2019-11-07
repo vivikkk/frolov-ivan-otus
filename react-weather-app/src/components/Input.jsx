@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Input = (props) => {
   return (
@@ -13,5 +14,8 @@ const Input = (props) => {
   );
 };
 
+Input.propTypes = {
+  searchInputHandler: PropTypes.func.isRequired
+};
 
 export default Input;

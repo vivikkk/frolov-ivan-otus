@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Checkbox = (props) => {
   return (
@@ -11,6 +12,11 @@ const Checkbox = (props) => {
       <span> Добавить в избранное</span>
     </label>
   );
+};
+
+Checkbox.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  checkboxHandler: PropTypes.func.isRequired
 };
 
 export default Checkbox;
