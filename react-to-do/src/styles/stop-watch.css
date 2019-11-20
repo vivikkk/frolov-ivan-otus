@@ -1,0 +1,13 @@
+.stop-watch__controls {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+}
+
+.stop-watch-control {
+	padding: 10px;
+	margin: 0 10px;
+	background: #545454;
+	border-radius: 5px;
+	cursor: pointer;
+}
