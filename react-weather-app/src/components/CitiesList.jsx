@@ -1,70 +1,83 @@
 import React from 'react';
 import City from './City';
 import Input from './Input';
-import PropTypes from 'prop-types';
+
+const API_URL = 'https://api.openweathermap.org/data/2.5/weather?'
+const API_KEY = 'd4d7737620b5cf3db260c35e7a1be93d';
 
 class CitiesList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      cities: this.props.cities,
+      city: {},
+      favoriteCities: []
     };
-
-    this.favoriteStatusChange = this.favoriteStatusChange.bind(this);
     this.searhChange = this.searhChange.bind(this);
+    this.getCityWeather = this.getCityWeather.bind(this);
+    this.favoriteStatusChange = this.favoriteStatusChange.bind(this);
   }
 
-  componentDidMount() {
-    let cities = this.state.cities;
+  async getCityWeather(searchString) {
+    const url = `${API_URL}q=${searchString}&appid=${API_KEY}&units=metric`;
+    const response = await fetch(url);
 
-    cities.forEach((item) => {
-      item.isFavorite = false;
-    });
+    if (response.ok) {
+      const data = await response.json();
 
-    this.setState({ cities });
+      return data;
+    }
+  }
+
+  async searhChange(event) {
+    const searchInput = event.currentTarget.value;
+    const result = await this.getCityWeather(searchInput);
+
+    if (result) {
+      this.setState({
+        city: result
+      });
+    } else {
+      this.setState({
+        city: {}
+      });
+    }
   }
 
   favoriteStatusChange(id) {
-    const cities = this.state.cities;
-    const currentCity = cities.find(city => city.id === id);
+    const favoriteCities = this.state.favoriteCities;
+    const index = favoriteCities.indexOf(id);
 
-    currentCity.isFavorite = !currentCity.isFavorite;
-    this.setState({ cities });
-  }
-
-  searhChange(event) {
-    const searchInput = event.currentTarget.value;
-    const cities = this.props.cities.filter(item => {
-      return item.name.toLowerCase().includes(searchInput.toLowerCase())
-    });
-
-    this.setState({ cities });
+    if (index !== -1) {
+      favoriteCities.splice(index, 1);
+      this.setState({
+        favoriteCities: [...favoriteCities]
+      });
+    } else {
+      this.setState({
+        favoriteCities: [...favoriteCities, id]
+      });
+    }
   }
 
   render() {
-    return(
+    return (
       <section>
-        <Input
-          searchInputHandler={this.searhChange}
-        />
-        <br/>
-        {this.state.cities.map(city => {
-          return(
-            <City
-              key={city.id}
-              onFavoriteStatusChange={this.favoriteStatusChange}
-              {...city}
-            />
-          );
-        })}
+        <Input searchInputHandler={ this.searhChange } />
+        <hr/>
+        {
+          Object.keys(this.state.city).length ?
+          <City
+            onFavoriteStatusChange = { this.favoriteStatusChange }
+            isFavorite = { this.state.favoriteCities.some(id => id === this.state.city.id) }
+            { ...this.state.city }
+          />
+          : <div>Пусто</div>
+        }
+        <hr/>
       </section>
     );
   }
 }
-
-CitiesList.propTypes = {
-  cities: PropTypes.array.isRequired
-};
 
 export default CitiesList;

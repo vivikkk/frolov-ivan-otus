@@ -10,37 +10,37 @@ class City extends React.Component {
   render() {
     return(
       <div>
-        <h3>{this.props.name}</h3>
-        <p>Скорость ветра: {this.props.wind.speed} m/s,</p>
-        <p>Температура: {this.props.main.temp} °C</p>
-        <p>Давление: {this.props.main.pressure} hpa</p>
-        <p>Координаты: [{this.props.coord.lon.toFixed(2)}, {this.props.coord.lat.toFixed(2)}]</p>
-
-        <Checkbox
-          checked={this.props.isFavorite ? true : false}
-          checkboxHandler={() => this.props.onFavoriteStatusChange(this.props.id)}
-        />
-        <hr/>
+        <div>
+          <h3>{this.props.name}</h3>
+          <p>Скорость ветра: {this.props.wind.speed} m/s,</p>
+          <p>Температура: {this.props.main.temp} °C</p>
+          <p>Давление: {this.props.main.pressure} hpa</p>
+          <p>Координаты: [{this.props.coord.lon.toFixed(2)}, {this.props.coord.lat.toFixed(2)}]</p>
+          <Checkbox
+            checked={this.props.isFavorite}
+            checkboxHandler={() => this.props.onFavoriteStatusChange(this.props.id)}
+          />
+        </div>
       </div>
     );
   }
 }
 
 City.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
+  id: PropTypes.number,
+  name: PropTypes.string,
   wind: PropTypes.shape({
-    speed: PropTypes.number.isRequired
+    speed: PropTypes.number
   }),
   main: PropTypes.shape({
-    temp: PropTypes.number.isRequired,
-    pressure: PropTypes.number.isRequired,
+    temp: PropTypes.number,
+    pressure: PropTypes.number,
   }),
   coord: PropTypes.shape({
-    lon: PropTypes.number.isRequired,
-    lat: PropTypes.number.isRequired
+    lon: PropTypes.number,
+    lat: PropTypes.number
   }),
-  onFavoriteStatusChange: PropTypes.func.isRequired
+  onFavoriteStatusChange: PropTypes.func
 };
 
 export default City;
