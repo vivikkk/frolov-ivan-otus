@@ -8,19 +8,42 @@ class City extends React.Component {
   }
 
   render() {
+    const {name, wind, main, coord, isFavorite} = this.props;
+
     return(
       <div>
-        <div>
-          <h3>{this.props.name}</h3>
-          <p>Скорость ветра: {this.props.wind.speed} m/s,</p>
-          <p>Температура: {this.props.main.temp} °C</p>
-          <p>Давление: {this.props.main.pressure} hpa</p>
-          <p>Координаты: [{this.props.coord.lon.toFixed(2)}, {this.props.coord.lat.toFixed(2)}]</p>
-          <Checkbox
-            checked={this.props.isFavorite}
-            checkboxHandler={() => this.props.onFavoriteStatusChange(this.props.id)}
-          />
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <td>
+                <strong>{name}</strong>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Скорость ветра:</td>
+              <td>{wind.speed} m/s</td>
+            </tr>
+            <tr>
+              <td>Температура:</td>
+              <td>{main.temp} °C</td>
+            </tr>
+            <tr>
+              <td>Давление:</td>
+              <td>{main.pressure} hpa</td>
+            </tr>
+            <tr>
+              <td>Координаты:</td>
+              <td>[{coord.lon.toFixed(2)}, {coord.lat.toFixed(2)}]</td>
+            </tr>
+          </tbody>
+        </table>
+        <br/>
+        <Checkbox
+          checked={isFavorite}
+          checkboxHandler={() => this.props.onFavoriteStatusChange(this.props.id)}
+        />
       </div>
     );
   }

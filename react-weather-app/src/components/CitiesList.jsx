@@ -1,16 +1,14 @@
 import React from 'react';
+import Config from '../config';
 import City from './City';
 import Input from './Input';
-
-const API_URL = 'https://api.openweathermap.org/data/2.5/weather?'
-const API_KEY = 'd4d7737620b5cf3db260c35e7a1be93d';
 
 class CitiesList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      city: {},
+      city: null,
       favoriteCities: []
     };
     this.searhChange = this.searhChange.bind(this);
@@ -18,8 +16,12 @@ class CitiesList extends React.Component {
     this.favoriteStatusChange = this.favoriteStatusChange.bind(this);
   }
 
+  componentDidMount() {
+    this.getCityWeather()
+  }
+
   async getCityWeather(searchString) {
-    const url = `${API_URL}q=${searchString}&appid=${API_KEY}&units=metric`;
+    const url = `${Config.API_URL}q=${searchString}&appid=${Config.API_KEY}&units=metric`;
     const response = await fetch(url);
 
     if (response.ok) {
@@ -39,7 +41,7 @@ class CitiesList extends React.Component {
       });
     } else {
       this.setState({
-        city: {}
+        city: null
       });
     }
   }
@@ -63,16 +65,16 @@ class CitiesList extends React.Component {
   render() {
     return (
       <section>
-        <Input searchInputHandler={ this.searhChange } />
+        <Input searchInputHandler = { this.searhChange } />
         <hr/>
         {
-          Object.keys(this.state.city).length ?
+          this.state.city ?
           <City
             onFavoriteStatusChange = { this.favoriteStatusChange }
             isFavorite = { this.state.favoriteCities.some(id => id === this.state.city.id) }
             { ...this.state.city }
           />
-          : <div>Пусто</div>
+          : <div>¯\_(ツ)_/¯</div>
         }
         <hr/>
       </section>
