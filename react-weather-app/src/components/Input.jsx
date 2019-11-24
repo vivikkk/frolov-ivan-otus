@@ -6,7 +6,7 @@ const Input = (props) => {
     <label>
       <span>Поиск по городу: </span>
       <input
-        onChange={props.searchInputHandler}
+        onChange={ props.inputHandler }
         type="text"
         name="name"
       />
@@ -15,7 +15,7 @@ const Input = (props) => {
 };
 
 Input.propTypes = {
-  searchInputHandler: PropTypes.func.isRequired
+  inputHandler: PropTypes.func.isRequired
 };
 
 export default Input;

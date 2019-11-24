@@ -5,10 +5,30 @@ import PropTypes from 'prop-types';
 class City extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isFavorite: false
+    };
+  }
+
+  componentDidMount() {
+    const id = this.props.id;
+
+    this.setState({
+      isFavorite: this.props.favoriteCities.some(item => item === id)
+    })
+  }
+
+  checkboxHandler(id) {
+    this.props.favoriteStatusChange(id);
+
+    this.setState({
+      isFavorite: !this.state.isFavorite
+    });
   }
 
   render() {
-    const { name, wind, main, coord, isFavorite } = this.props;
+    const { id, name, wind, main, coord } = this.props;
 
     return(
       <div>
@@ -41,8 +61,8 @@ class City extends Component {
         </table>
         <br/>
         <Checkbox
-          checked={isFavorite}
-          checkboxHandler={() => this.props.onFavoriteStatusChange(this.props.id)}
+          checked={ this.state.isFavorite }
+          checkboxHandler={ () => this.checkboxHandler(id) }
         />
       </div>
     );
@@ -50,20 +70,20 @@ class City extends Component {
 }
 
 City.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
   wind: PropTypes.shape({
-    speed: PropTypes.number
+    speed: PropTypes.number.isRequired,
   }),
   main: PropTypes.shape({
-    temp: PropTypes.number,
-    pressure: PropTypes.number,
+    temp: PropTypes.number.isRequired,
+    pressure: PropTypes.number.isRequired,
   }),
   coord: PropTypes.shape({
-    lon: PropTypes.number,
-    lat: PropTypes.number
+    lon: PropTypes.number.isRequired,
+    lat: PropTypes.number.isRequired,
   }),
-  onFavoriteStatusChange: PropTypes.func
+  favoriteStatusChange: PropTypes.func.isRequired
 };
 
 export default City;

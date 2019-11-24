@@ -1,9 +1,10 @@
-import { GET_WEATHER_REQUEST, GET_WEATHER_SUCCESS, GET_WEATHER_ERROR } from '../actions/';
+import { GET_WEATHER_REQUEST, GET_WEATHER_SUCCESS, GET_WEATHER_ERROR } from '../actions/cityActions';
 
 export const initialState = {
   name: null,
   weather: null,
-  isFetching: false
+  isFetching: false,
+  isFavorite: false
 };
 
 export function cityReducer(state = initialState, action) {

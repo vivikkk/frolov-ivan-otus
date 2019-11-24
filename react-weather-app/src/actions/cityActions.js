@@ -10,7 +10,7 @@ export function getWeather(searchString) {
   return dispatch => {
     dispatch({
       type: GET_WEATHER_REQUEST,
-      payload: searchString,
+      payload: searchString
     })
 
     fetch(url)
