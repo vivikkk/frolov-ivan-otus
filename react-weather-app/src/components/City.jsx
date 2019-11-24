@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Checkbox from './Checkbox'
 import PropTypes from 'prop-types';
 
-class City extends React.Component {
+class City extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const {name, wind, main, coord, isFavorite} = this.props;
+    const { name, wind, main, coord, isFavorite } = this.props;
 
     return(
       <div>
@@ -16,26 +16,26 @@ class City extends React.Component {
           <thead>
             <tr>
               <td>
-                <strong>{name}</strong>
+                <strong>{ name }</strong>
               </td>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Скорость ветра:</td>
-              <td>{wind.speed} m/s</td>
+              <td>{ wind.speed } m/s</td>
             </tr>
             <tr>
               <td>Температура:</td>
-              <td>{main.temp} °C</td>
+              <td>{ main.temp } °C</td>
             </tr>
             <tr>
               <td>Давление:</td>
-              <td>{main.pressure} hpa</td>
+              <td>{ main.pressure } hpa</td>
             </tr>
             <tr>
               <td>Координаты:</td>
-              <td>[{coord.lon.toFixed(2)}, {coord.lat.toFixed(2)}]</td>
+              <td>[{ coord.lon.toFixed(2) }, { coord.lat.toFixed(2) }]</td>
             </tr>
           </tbody>
         </table>

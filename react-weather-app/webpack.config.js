@@ -3,7 +3,7 @@ const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
-  entry: "./src/App.jsx",
+  entry: "./src/index.js",
   devtool: "source-map",
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".json"]
