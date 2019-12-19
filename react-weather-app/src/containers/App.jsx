@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   render() {
-    const { weatherAction, city, favoriteCities} = this.props;
+    const { weatherAction, city, favoriteCities } = this.props;
 
     return(
       <Router>
@@ -42,22 +42,15 @@ class App extends Component {
                 <br/>
                 <br/>
                 <CityShort
-                  getWeather={ weatherAction }
-                  isFetching={ city.isFetching }
-                  weather={ city.weather }
-                  favoriteCities={ favoriteCities }
                   favoriteStatusChange={ this.favoriteStatusChange }
-                  {...props}
+                  {...this.props}
                 />
               </section>
             }/>
             <Route path="/:city" render={props =>
               <CityFull
-                getWeather={ weatherAction }
-                isFetching={ city.isFetching }
-                weather={ city.weather }
-                favoriteCities={ favoriteCities }
                 favoriteStatusChange={ this.favoriteStatusChange }
+                {...this.props}
                 {...props}
               />
             }/>

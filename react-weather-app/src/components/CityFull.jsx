@@ -11,17 +11,17 @@ class CityFull extends Component {
 
     this.state = {
       isFavorite: false,
-      showCity: false,
+      showCity: false
     }
   }
 
   componentDidMount() {
-    this.props.getWeather(this.props.match.params.city, true);
+    this.props.weatherAction(this.props.match.params.city, true);
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.weather !== this.props.weather) {
-      const id = this.props.weather.city.id;
+    if (prevProps.city.weather !== this.props.city.weather) {
+      const id = this.props.city.weather.city.id;
 
       this.setState({
         showCity: true,
@@ -38,7 +38,8 @@ class CityFull extends Component {
   }
 
   render() {
-    const { isFetching, weather } = this.props;
+    const { isFetching, weather } = this.props.city;
+
     const cardStyle = {
       marginBottom: '20px',
       marginRight: '20px',
@@ -71,7 +72,7 @@ class CityFull extends Component {
             </div>
             <Checkbox
               checked={ this.state.isFavorite }
-              checkboxHandler={ () => this.checkboxHandler(this.props.weather.city.id) }
+              checkboxHandler={ () => this.checkboxHandler(weather.city.id) }
             />
           </div>
           : <NotFound />

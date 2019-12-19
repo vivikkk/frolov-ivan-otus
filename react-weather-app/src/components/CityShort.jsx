@@ -14,24 +14,18 @@ class CityShort extends Component {
   }
 
   componentDidMount() {
-    this.props.getWeather(null);
-  }
-
-  componentWillMount() {
-    this.setState({
-      showCity: false
-    });
+    this.props.weatherAction(null);
   }
 
   componentWillReceiveProps(nextProps) {
-    if ((nextProps.weather !== this.props.weather) && nextProps.weather) {
-      const id = nextProps.weather.id;
+    if ((nextProps.city.weather !== this.props.city.weather) && nextProps.city.weather) {
+      const id = nextProps.city.weather.id;
 
       this.setState({
         showCity: true,
         isFavorite: nextProps.favoriteCities.some(item => item === id)
       });
-    } else if(!nextProps.weather) {
+    } else if(!nextProps.city.weather) {
       this.setState({
         showCity: false
       });
@@ -46,7 +40,7 @@ class CityShort extends Component {
   }
 
   render() {
-    const { isFetching, weather } = this.props;
+    const { isFetching, weather } = this.props.city;
 
     return(
       <section>
