@@ -1,0 +1,11 @@
+{
+  "name": "node_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "files_tree.js",
+  "scripts": {
+    "start": "node files_tree -d"
+  },
+  "author": "",
+  "license": "ISC"
+}

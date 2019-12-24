@@ -1,0 +1,1 @@
+{"files":["foo/bar/b1.txt","foo/bar/b2.txt","foo/f1.txt","foo/f2.txt"],"dirs":["foo","foo/bar","foo/bar/baz"]}
