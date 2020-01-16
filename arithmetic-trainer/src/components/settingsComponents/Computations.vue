@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="mt-6">Типы вычислений</h3>
+    <h3>Типы вычислений</h3>
     <v-checkbox
       v-for="(item, index) in test"
       :key="index"

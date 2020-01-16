@@ -1,22 +1,13 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="12">
-        <h3>Длительность:
-          <span v-text="duration"></span> {{ declOfNum }}
-        </h3>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="6">
-        <v-slider
-          v-model="duration"
-          min="1"
-          max="15"
-        ></v-slider>
-      </v-col>
-    </v-row>
+    <h3 class="mb-6">Длительность:
+      <span v-text="duration"></span> {{ declOfNum }}
+    </h3>
+    <v-slider
+      v-model="duration"
+      min="1"
+      max="15"
+    ></v-slider>
   </div>
 </template>
 
