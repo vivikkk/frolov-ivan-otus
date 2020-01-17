@@ -20,7 +20,6 @@
 
     <v-row class="mt-8 justify-center">
       <Digits/>
-
       <v-col cols="2" class="d-flex flex-wrap justify-center">
         <Computations/>
       </v-col>

@@ -1,15 +1,18 @@
 <template>
-  <div class="mt-5 d-flex flex-column mt-4">
-    <v-btn
-      class="mx-auto mb-8"
-      color="red"
+  <div class="d-flex flex-column justify-space-between">
+    <div
       v-for="(item, index) in computations"
       :key="index"
-      fab
-      dark
     >
-      <span>{{ item.symbol }}</span>
-    </v-btn>
+      <v-btn
+        class="mx-auto"
+        color="red"
+        fab
+        dark
+      >
+        <span>{{ item.symbol }}</span>
+      </v-btn>
+    </div>
   </div>
 </template>
 
