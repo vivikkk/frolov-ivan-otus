@@ -2,7 +2,7 @@
   <div>
     <h3>Типы вычислений</h3>
     <v-checkbox
-      v-for="(item, index) in test"
+      v-for="(item, index) in computations"
       :key="index"
       class="mb-n6"
       color="primary"
@@ -20,7 +20,7 @@ export default {
   data () {
     return {
       selected: ['difference'],
-      test: [
+      computations: [
         {
           label: 'Суммирование',
           value: 'amount'
