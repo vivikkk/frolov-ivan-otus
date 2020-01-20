@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="justify-space-between">
       <v-col cols="3">
-        <v-btn to="/" x-large color="primary">
+        <v-btn to="/" large color="primary">
           <v-icon dark>mdi-close</v-icon>
           <span>Отмена</span>
         </v-btn>
