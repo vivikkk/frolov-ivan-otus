@@ -20,6 +20,15 @@
       </v-row>
 
     </v-container>
+
+    <v-container>
+        <v-btn to="/game" class="mt-8 mb-6" x-large color="primary">
+          <v-avatar class="mr-2" size="32px">
+            <img src="https://94info.com/upload/images/users/small/20190222172656957.jpg">
+          </v-avatar>
+          <span>Ю вана плей? летс плей!</span>
+        </v-btn>
+      </v-container>
   </v-container>
 </template>
 
