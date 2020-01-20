@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="mb-6">Длительность:
-      <span v-text="duration"></span> {{ declOfNum }}
+      <span>{{ duration | declOfNum(['минута', 'минуты', 'минут']) }}</span>
     </h3>
     <v-slider
       v-model="duration"
@@ -17,13 +17,14 @@ export default {
 
   data: () => ({
     duration: 3,
-    cases: [2, 0, 1, 1, 1, 2],
-    declOfMinutes: ['минута', 'минуты', 'минут']
+    cases: [2, 0, 1, 1, 1, 2]
   }),
 
-  computed: {
-    declOfNum () {
-      return this.declOfMinutes[(this.duration % 100 > 4 && this.duration % 100 < 20) ? 2 : this.cases[(this.duration % 10 < 5) ? this.duration % 10 : 5]]
+  filters: {
+    declOfNum: (value, declOfNum) => {
+      const cases = [2, 0, 1, 1, 1, 2]
+
+      return `${value} ${declOfNum[(value % 100 > 4 && value % 100 < 20) ? 2 : cases[(value % 10 < 5) ? value % 10 : 5]]}`
     }
   }
 }
