@@ -10,12 +10,6 @@
       <span>{{ currentTimer | timeParser }}</span>
     </v-card>
 
-    <!-- <v-progress-linear
-      background-color="primary lighten-4"
-      color="primary"
-      stream
-      :value="getPercentOfTimer"
-    ></v-progress-linear> -->
     <v-progress-linear
       color="light-blue"
       height="10"
@@ -26,19 +20,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Timer',
 
   data () {
     return {
-      initialTimer: 222,
+      durationInSeconds: 0,
       currentTimer: 0,
       interval: null
     }
   },
 
   beforeMount () {
-    this.currentTimer = this.initialTimer
+    this.durationInSeconds = this.duration * 60
+    this.currentTimer = this.durationInSeconds
   },
 
   mounted () {
@@ -48,8 +45,10 @@ export default {
   },
 
   computed: {
+    ...mapGetters(['duration']),
+
     getPercentOfTimer () {
-      return 100 - Math.floor(this.currentTimer / this.initialTimer * 100)
+      return 100 - Math.floor(this.currentTimer / this.durationInSeconds * 100)
     }
   },
 

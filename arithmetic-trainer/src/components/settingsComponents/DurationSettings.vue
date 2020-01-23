@@ -6,7 +6,7 @@
     <v-slider
       v-model="duration"
       min="1"
-      max="15"
+      max="5"
     ></v-slider>
   </div>
 </template>
@@ -15,9 +15,16 @@
 export default {
   name: 'DurationSettings',
 
-  data: () => ({
-    duration: 3,
-    cases: [2, 0, 1, 1, 1, 2]
-  })
+  computed: {
+    duration: {
+      get () {
+        return this.$store.getters.duration
+      },
+
+      set (value) {
+        this.$store.commit('updateDuration', value)
+      }
+    }
+  }
 }
 </script>

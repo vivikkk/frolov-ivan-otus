@@ -19,7 +19,6 @@ export default {
 
   data () {
     return {
-      selected: ['difference'],
       computations: [
         {
           label: 'Суммирование',
@@ -42,6 +41,18 @@ export default {
           value: 'elevation'
         }
       ]
+    }
+  },
+
+  computed: {
+    selected: {
+      get () {
+        return this.$store.getters.computations
+      },
+
+      set (value) {
+        this.$store.commit('updateComputations', value)
+      }
     }
   }
 }

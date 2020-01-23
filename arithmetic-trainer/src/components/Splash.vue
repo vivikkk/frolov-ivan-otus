@@ -13,8 +13,10 @@
 export default {
   name: 'Splash',
 
-  data: () => ({
-    helloMessage: 'Дороу!1!!!'
-  })
+  data () {
+    return {
+      helloMessage: 'Дороу!1!!!'
+    }
+  }
 }
 </script>
