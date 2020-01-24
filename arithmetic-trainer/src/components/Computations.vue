@@ -1,38 +1,34 @@
 <template>
-  <v-col cols="1" class="d-flex flex-wrap justify-center">
-    <div class="d-flex flex-column">
-      <div
-        v-for="(item, index) in computations"
-        :key="index">
-        <v-btn
-          class="mx-auto mb-4"
-          :color="item.value === '=' ? 'green': 'red'"
-          fab
-          dark>
-          <span>{{ item.symbol }}</span>
-        </v-btn>
-      </div>
-    </div>
+  <v-col cols="2">
+    <v-btn
+      @click="$emit('remove-symbol')"
+      class="mx-auto mb-4"
+      color="primary"
+      block
+      dark>
+      <span>ᐊ Стереть</span>
+    </v-btn>
+
+    <v-btn
+      class="mx-auto mb-4"
+      color="green"
+      block
+      dark>
+      <span>= Равно</span>
+    </v-btn>
+
+    <v-btn
+      class="mx-auto mb-4"
+      color="red"
+      block
+      dark>
+      <span>? Не знаю</span>
+    </v-btn>
   </v-col>
 </template>
 
 <script>
 export default {
-  name: 'Computations',
-
-  data () {
-    return {
-      computations: [
-        {
-          symbol: '=',
-          value: '='
-        },
-        {
-          symbol: '?',
-          value: '?'
-        }
-      ]
-    }
-  }
+  name: 'Computations'
 }
 </script>

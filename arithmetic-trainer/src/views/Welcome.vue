@@ -24,13 +24,13 @@
     <v-container>
         <v-btn
           to="/game"
-          :disabled="!computations.length"
+          :disabled="!isNotEmptyComputations"
           class="mt-8 mb-6"
           x-large
           color="primary">
           <v-avatar
             class="mr-2"
-            :class="{'avatar_disabled': !computations.length}"
+            :class="{'avatar_disabled': !isNotEmptyComputations}"
             size="32px">
             <img src="https://94info.com/upload/images/users/small/20190222172656957.jpg">
           </v-avatar>
@@ -57,7 +57,7 @@ export default {
     ComputationsSettings
   },
 
-  computed: mapGetters(['computations'])
+  computed: mapGetters(['computations', 'isNotEmptyComputations'])
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="isNotEmptyComputations">
     <v-row class="justify-space-between">
       <v-col cols="3">
         <v-btn to="/" large color="primary">
@@ -10,6 +10,12 @@
       <v-col cols="2">
         <Timer/>
       </v-col>
+      <v-snackbar
+        :timeout="timeout"
+        color="success"
+        right
+        bottom
+        v-model="snackbar">+1</v-snackbar>
     </v-row>
 
     <v-row class="display-3 mt-8 justify-center">
@@ -17,13 +23,14 @@
         <Calculations
           :numbers="numbers"
           :symbol="randomSymbol"
+          :result="str"
         />
       </v-col>
     </v-row>
 
     <v-row class="mt-8 justify-center">
-      <Digits/>
-      <Computations/>
+      <Digits @click-digits="digitsInput"/>
+      <Computations @remove-symbol="removeSymbol"/>
     </v-row>
   </v-container>
 </template>
@@ -47,6 +54,9 @@ export default {
 
   data () {
     return {
+      snackbar: false,
+      str: '',
+      timeout: 2000,
       numbers: {
         a: this.random(),
         b: this.random()
@@ -55,6 +65,8 @@ export default {
   },
 
   mounted () {
+    if (!this.isNotEmptyComputations) this.$router.push('/')
+
     switch (this.difficulty) {
       case 2:
         this.numbers.a = this.random(1, 100)
@@ -68,14 +80,24 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['difficulty', 'computations']),
+    ...mapGetters(['difficulty', 'computations', 'computationsLength', 'isNotEmptyComputations']),
 
     randomSymbol () {
-      return this.computations[this.random(1, (this.computations.length + 1)) - 1]
+      return this.computations[this.random(1, (this.computationsLength + 1)) - 1]
     }
   },
 
   methods: {
+    digitsInput (num) {
+      this.str = this.str + String(num)
+    },
+
+    removeSymbol () {
+      if (this.str) {
+        this.str = this.str.slice(0, -1)
+      }
+    },
+
     random (min = 1, max = 10) {
       return Math.floor(Math.random() * (max - min)) + min
     }

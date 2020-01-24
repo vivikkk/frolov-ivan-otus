@@ -9,6 +9,7 @@
       <v-btn
         class="mx-auto"
         color="primary"
+        @click="$emit('click-digits', n - 1)"
         fab
         dark
       >

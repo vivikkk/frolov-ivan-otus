@@ -1,10 +1,10 @@
 <template>
-  <div class="d-flex">
-    <span class="font-weight-bold">{{ numbers.a }}</span>
+  <div class="d-flex font-weight-bold font-family-mono display-3">
+    <span>{{ numbers.a }}</span>
     <span class="pl-5 pr-5">{{ symbol }}</span>
-    <span class="placeholder d-inline-flex font-weight-bold justify-center">{{ numbers.b }}</span>
+    <span class="placeholder d-inline-flex justify-center">{{ numbers.b }}</span>
     <span class="pl-5 pr-5">=</span>
-    <span class="placeholder placeholder_border d-inline-flex justify-center"></span>
+    <span class="placeholder placeholder_border d-inline-flex justify-center">{{ result }}</span>
   </div>
 </template>
 
@@ -18,6 +18,10 @@ export default {
       required: true
     },
     symbol: {
+      type: String,
+      required: true
+    },
+    result: {
       type: String,
       required: true
     }
@@ -43,6 +47,10 @@ export default {
 </script>
 
 <style scoped>
+.font-family-mono {
+  font-family: monospace
+}
+
 .placeholder {
   min-width: 50px
 }

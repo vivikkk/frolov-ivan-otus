@@ -47,7 +47,7 @@ export default {
 
   methods: {
     isDisable (val) {
-      const activeArr = ['amount', 'multiplication']
+      const activeArr = ['+', '*']
 
       return !activeArr.some(item => item === val)
     }

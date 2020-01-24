@@ -15,6 +15,14 @@ export default {
 
     computations (state) {
       return state.computations
+    },
+
+    isNotEmptyComputations (state) {
+      return !!state.computations.length
+    },
+
+    computationsLength (state) {
+      return state.computations.length
     }
   },
   mutations: {
