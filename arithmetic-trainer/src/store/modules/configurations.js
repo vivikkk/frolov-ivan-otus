@@ -2,7 +2,7 @@ export default {
   state: {
     duration: 1,
     difficulty: 2,
-    computations: ['difference']
+    computations: []
   },
   getters: {
     duration (state) {

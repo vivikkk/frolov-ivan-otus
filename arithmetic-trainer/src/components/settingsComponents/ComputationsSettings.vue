@@ -7,6 +7,7 @@
       class="mb-n6"
       color="primary"
       v-model="selected"
+      :disabled="isDisable(item.value)"
       :label="item.label"
       :value="item.value">
     </v-checkbox>
@@ -25,12 +26,12 @@ export default {
           value: 'amount'
         },
         {
-          label: 'Разность',
-          value: 'difference'
-        },
-        {
           label: 'Умножение',
           value: 'multiplication'
+        },
+        {
+          label: 'Разность',
+          value: 'difference'
         },
         {
           label: 'Деление',
@@ -41,6 +42,14 @@ export default {
           value: 'elevation'
         }
       ]
+    }
+  },
+
+  methods: {
+    isDisable (val) {
+      const activeArr = ['amount', 'multiplication']
+
+      return !activeArr.some(item => item === val)
     }
   },
 

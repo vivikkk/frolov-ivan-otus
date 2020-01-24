@@ -11,10 +11,10 @@
     </v-card>
 
     <v-progress-linear
-      color="light-blue"
       height="10"
-      :value="getPercentOfTimer"
       striped
+      :color="getColorOfTimer"
+      :value="getPercentOfTimer"
     ></v-progress-linear>
   </div>
 </template>
@@ -46,6 +46,12 @@ export default {
 
   computed: {
     ...mapGetters(['duration']),
+
+    getColorOfTimer () {
+      const alarmTime = 10
+
+      return this.currentTimer > alarmTime ? 'light-blue' : 'red darken-2'
+    },
 
     getPercentOfTimer () {
       return 100 - Math.floor(this.currentTimer / this.durationInSeconds * 100)

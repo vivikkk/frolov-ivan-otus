@@ -7,7 +7,7 @@
       max="3"
       :tick-labels="seasons"
       :color="getDifficultColor"
-      ticks="always">
+      ticks>
     </v-slider>
   </div>
 </template>
@@ -19,9 +19,9 @@ export default {
   data () {
     return {
       colors: [
-        '#EF9A9A',
-        '#D32F2F',
-        '#B71C1C'
+        'red lighten-3',
+        'red darken-2',
+        'red darken-4'
       ],
       seasons: [
         'Изян',
