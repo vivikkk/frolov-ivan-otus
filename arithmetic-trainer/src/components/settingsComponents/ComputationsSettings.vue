@@ -23,23 +23,23 @@ export default {
       computations: [
         {
           label: 'Суммирование',
-          value: 'amount'
+          value: '+'
         },
         {
           label: 'Умножение',
-          value: 'multiplication'
+          value: '*'
         },
         {
           label: 'Разность',
-          value: 'difference'
+          value: '-'
         },
         {
           label: 'Деление',
-          value: 'division'
+          value: '/'
         },
         {
           label: 'Возведение в степень',
-          value: 'elevation'
+          value: 'ˆ'
         }
       ]
     }

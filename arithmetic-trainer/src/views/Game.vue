@@ -14,7 +14,10 @@
 
     <v-row class="display-3 mt-8 justify-center">
       <v-col cols="10" class="d-flex justify-center">
-        <Calculations/>
+        <Calculations
+          :numbers="numbers"
+          :symbol="randomSymbol"
+        />
       </v-col>
     </v-row>
 
@@ -30,6 +33,7 @@ import Timer from '../components/Timer'
 import Calculations from '../components/Calculations'
 import Computations from '../components/Computations'
 import Digits from '../components/Digits'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Game',
@@ -39,6 +43,42 @@ export default {
     Calculations,
     Digits,
     Computations
+  },
+
+  data () {
+    return {
+      numbers: {
+        a: this.random(),
+        b: this.random()
+      }
+    }
+  },
+
+  mounted () {
+    switch (this.difficulty) {
+      case 2:
+        this.numbers.a = this.random(1, 100)
+        this.numbers.b = this.numbers.a > 10 ? this.random() : this.random(1, 100)
+        break
+      case 3:
+        this.numbers.a = this.random(1, 100)
+        this.numbers.b = this.random(1, 100)
+        break
+    }
+  },
+
+  computed: {
+    ...mapGetters(['difficulty', 'computations']),
+
+    randomSymbol () {
+      return this.computations[this.random(1, (this.computations.length + 1)) - 1]
+    }
+  },
+
+  methods: {
+    random (min = 1, max = 10) {
+      return Math.floor(Math.random() * (max - min)) + min
+    }
   }
 }
 </script>

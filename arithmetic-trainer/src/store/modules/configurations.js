@@ -1,8 +1,8 @@
 export default {
   state: {
     duration: 1,
-    difficulty: 2,
-    computations: []
+    difficulty: 1,
+    computations: ['+', '*']
   },
   getters: {
     duration (state) {
