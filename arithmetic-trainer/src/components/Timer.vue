@@ -5,8 +5,7 @@
       height="42"
       outlined
       flat
-      tile
-    >
+      tile>
       <span>{{ currentTimer | timeParser }}</span>
     </v-card>
 
