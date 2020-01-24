@@ -23,7 +23,7 @@
         <Calculations
           :numbers="numbers"
           :symbol="randomSymbol"
-          :result="str"
+          :result="this.value"
         />
       </v-col>
     </v-row>
@@ -40,7 +40,7 @@ import Timer from '../components/Timer'
 import Calculations from '../components/Calculations'
 import Computations from '../components/Computations'
 import Digits from '../components/Digits'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Game',
@@ -55,7 +55,6 @@ export default {
   data () {
     return {
       snackbar: false,
-      str: '',
       timeout: 2000,
       numbers: {
         a: this.random(),
@@ -80,7 +79,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['difficulty', 'computations', 'computationsLength', 'isNotEmptyComputations']),
+    ...mapGetters(['difficulty', 'computations', 'computationsLength', 'isNotEmptyComputations', 'value']),
 
     randomSymbol () {
       return this.computations[this.random(1, (this.computationsLength + 1)) - 1]
@@ -88,13 +87,15 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['updateValue', 'removeLastSymbol']),
+
     digitsInput (num) {
-      this.str = this.str + String(num)
+      this.updateValue(num)
     },
 
     removeSymbol () {
-      if (this.str) {
-        this.str = this.str.slice(0, -1)
+      if (this.value) {
+        this.removeLastSymbol()
       }
     },
 
