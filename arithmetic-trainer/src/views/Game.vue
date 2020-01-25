@@ -22,8 +22,8 @@
       <v-col cols="10" class="d-flex justify-center">
         <Calculations
           :numbers="numbers"
-          :symbol="randomSymbol"
-          :result="this.value"
+          :symbol="symbol"
+          :result="value"
         />
       </v-col>
     </v-row>
@@ -40,7 +40,7 @@ import Timer from '../components/Timer'
 import Calculations from '../components/Calculations'
 import Computations from '../components/Computations'
 import Digits from '../components/Digits'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Game',
@@ -55,39 +55,45 @@ export default {
   data () {
     return {
       snackbar: false,
-      timeout: 2000,
-      numbers: {
-        a: this.random(),
-        b: this.random()
-      }
+      timeout: 2000
     }
   },
 
   mounted () {
-    if (!this.isNotEmptyComputations) this.$router.push('/')
-
-    switch (this.difficulty) {
-      case 2:
-        this.numbers.a = this.random(1, 100)
-        this.numbers.b = this.numbers.a > 10 ? this.random() : this.random(1, 100)
-        break
-      case 3:
-        this.numbers.a = this.random(1, 100)
-        this.numbers.b = this.random(1, 100)
-        break
+    if (!this.isNotEmptyComputations) {
+      this.$router.push('/')
+    } else {
+      this.randomDigits()
+      this.randomSymbol()
     }
   },
 
-  computed: {
-    ...mapGetters(['difficulty', 'computations', 'computationsLength', 'isNotEmptyComputations', 'value']),
-
-    randomSymbol () {
-      return this.computations[this.random(1, (this.computationsLength + 1)) - 1]
-    }
-  },
+  computed: mapGetters(['difficulty', 'computations', 'computationsLength', 'isNotEmptyComputations', 'value', 'symbol', 'numbers']),
 
   methods: {
-    ...mapMutations(['updateValue', 'removeLastSymbol']),
+    ...mapMutations(['updateValue', 'removeLastDigit', 'updateSymbol']),
+
+    ...mapActions(['shuffleArray']),
+
+    randomSymbol () {
+      const randomSymbol = this.computations[this.random(1, (this.computationsLength + 1)) - 1]
+
+      this.updateSymbol(randomSymbol)
+    },
+
+    randomDigits () {
+      switch (this.difficulty) {
+        case 1:
+          this.shuffleArray([this.random(), this.random()])
+          break
+        case 2:
+          this.shuffleArray([this.random(1, 100), this.random()])
+          break
+        case 3:
+          this.shuffleArray([this.random(1, 100), this.random(1, 100)])
+          break
+      }
+    },
 
     digitsInput (num) {
       this.updateValue(num)
@@ -95,7 +101,7 @@ export default {
 
     removeSymbol () {
       if (this.value) {
-        this.removeLastSymbol()
+        this.removeLastDigit()
       }
     },
 

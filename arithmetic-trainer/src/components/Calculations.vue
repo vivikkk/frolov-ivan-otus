@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex font-weight-bold font-family-mono display-3">
-    <span>{{ numbers.a }}</span>
+    <span>{{ numbers[0] }}</span>
     <span class="pl-5 pr-5">{{ symbol }}</span>
-    <span class="placeholder d-inline-flex justify-center">{{ numbers.b }}</span>
+    <span class="placeholder d-inline-flex justify-center">{{ numbers[1] }}</span>
     <span class="pl-5 pr-5">=</span>
     <span class="placeholder placeholder_border d-inline-flex justify-center">{{ result }}</span>
   </div>
@@ -14,7 +14,7 @@ export default {
 
   props: {
     numbers: {
-      type: Object,
+      type: Array,
       required: true
     },
     symbol: {
@@ -24,23 +24,6 @@ export default {
     result: {
       type: String,
       required: true
-    }
-  },
-
-  computed: {
-    getResult () {
-      let result = null
-
-      switch (this.symbol) {
-        case '+':
-          result = this.numbers.a + this.numbers.b
-          break
-        case '*':
-          result = this.numbers.a * this.numbers.b
-          break
-      }
-
-      return result
     }
   }
 }
