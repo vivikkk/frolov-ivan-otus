@@ -8,8 +8,6 @@
       <div class="d-flex">
         <div class="headline">Игра «Тренер мозга»</div>
       </div>
-
-      <v-spacer></v-spacer>
     </v-app-bar>
 
     <v-content>

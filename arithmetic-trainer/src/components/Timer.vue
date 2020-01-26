@@ -13,8 +13,8 @@
       height="10"
       striped
       :color="getColorOfTimer"
-      :value="getPercentOfTimer"
-    ></v-progress-linear>
+      :value="getPercentOfTimer">
+    </v-progress-linear>
   </div>
 </template>
 

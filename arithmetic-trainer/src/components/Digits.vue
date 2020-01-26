@@ -4,15 +4,13 @@
       class="digit d-inline-flex align-center"
       :class="{'order-10': n === 1, 'mb-4': n !== 1}"
       v-for="n in 10"
-      :key="n"
-    >
+      :key="n">
       <v-btn
         class="mx-auto"
         color="primary"
         @click="$emit('click-digits', n - 1)"
         fab
-        dark
-      >
+        dark>
         <span>{{ n - 1 }}</span>
       </v-btn>
     </div>

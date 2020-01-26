@@ -5,7 +5,7 @@
       v-model="difficulty"
       min="1"
       max="3"
-      :tick-labels="seasons"
+      :tick-labels="level"
       :color="getDifficultColor"
       ticks>
     </v-slider>
@@ -23,7 +23,7 @@ export default {
         'red darken-2',
         'red darken-4'
       ],
-      seasons: [
+      level: [
         'Изян',
         'Просто',
         'Сложно'

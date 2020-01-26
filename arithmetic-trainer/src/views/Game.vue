@@ -2,20 +2,24 @@
   <v-container v-if="isNotEmptyComputations">
     <v-row class="justify-space-between">
       <v-col cols="3">
-        <v-btn to="/" large color="primary">
+        <v-btn @click="endGame()" large color="primary">
           <v-icon dark>mdi-close</v-icon>
           <span>Отмена</span>
         </v-btn>
       </v-col>
+
       <v-col cols="2">
         <Timer/>
       </v-col>
+
       <v-snackbar
         :timeout="timeout"
         color="success"
         right
         bottom
-        v-model="snackbar">+1</v-snackbar>
+        v-model="snackbar">
+        <span>+1</span>
+      </v-snackbar>
     </v-row>
 
     <v-row class="display-3 mt-8 justify-center">
@@ -71,7 +75,7 @@ export default {
   computed: mapGetters(['difficulty', 'computations', 'computationsLength', 'isNotEmptyComputations', 'value', 'symbol', 'numbers']),
 
   methods: {
-    ...mapMutations(['updateValue', 'removeLastDigit', 'updateSymbol']),
+    ...mapMutations(['updateValue', 'removeLastDigit', 'updateSymbol', 'resetState']),
 
     ...mapActions(['shuffleArray']),
 
@@ -107,6 +111,11 @@ export default {
 
     random (min = 1, max = 10) {
       return Math.floor(Math.random() * (max - min)) + min
+    },
+
+    endGame () {
+      this.$router.push('/')
+      this.resetState()
     }
   }
 }
