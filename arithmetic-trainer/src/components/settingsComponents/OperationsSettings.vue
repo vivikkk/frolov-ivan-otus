@@ -2,7 +2,7 @@
   <div>
     <h3>Типы вычислений</h3>
     <v-checkbox
-      v-for="(item, index) in computations"
+      v-for="(item, index) in operations"
       :key="index"
       class="mb-n6"
       color="primary"
@@ -16,11 +16,11 @@
 
 <script>
 export default {
-  name: 'Computations',
+  name: 'Operations',
 
   data () {
     return {
-      computations: [
+      operations: [
         {
           label: 'Суммирование',
           value: '+'
@@ -56,11 +56,11 @@ export default {
   computed: {
     selected: {
       get () {
-        return this.$store.getters.computations
+        return this.$store.getters.operations
       },
 
       set (value) {
-        this.$store.commit('updateComputations', value)
+        this.$store.commit('updateOperations', value)
       }
     }
   }

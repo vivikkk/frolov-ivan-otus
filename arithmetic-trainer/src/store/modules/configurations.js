@@ -1,7 +1,7 @@
 const state = {
   duration: 1,
   difficulty: 1,
-  computations: ['+', '*']
+  operations: ['+', '*']
 }
 
 const getters = {
@@ -13,16 +13,16 @@ const getters = {
     return state.difficulty
   },
 
-  computations (state) {
-    return state.computations
+  operations (state) {
+    return state.operations
   },
 
-  isNotEmptyComputations (state) {
-    return !!state.computations.length
+  operationsLength (state) {
+    return state.operations.length
   },
 
-  computationsLength (state) {
-    return state.computations.length
+  isNotEmptyOperations () {
+    return !!getters.operationsLength
   }
 }
 
@@ -35,8 +35,8 @@ const mutations = {
     state.difficulty = value
   },
 
-  updateComputations (state, value) {
-    state.computations = value
+  updateOperations (state, value) {
+    state.operations = value
   }
 }
 

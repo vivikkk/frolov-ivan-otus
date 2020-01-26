@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="isNotEmptyComputations">
+  <v-container v-if="isNotEmptyOperations">
     <v-row class="justify-space-between">
       <v-col cols="3">
         <v-btn @click="endGame()" large color="primary">
@@ -64,7 +64,7 @@ export default {
   },
 
   mounted () {
-    if (!this.isNotEmptyComputations) {
+    if (!this.isNotEmptyOperations) {
       this.$router.push('/')
     } else {
       this.randomDigits()
@@ -72,15 +72,30 @@ export default {
     }
   },
 
-  computed: mapGetters(['difficulty', 'computations', 'computationsLength', 'isNotEmptyComputations', 'value', 'symbol', 'numbers']),
+  computed: {
+    ...mapGetters([
+      'difficulty',
+      'operations',
+      'operationsLength',
+      'isNotEmptyOperations',
+      'value',
+      'symbol',
+      'numbers'
+    ])
+  },
 
   methods: {
-    ...mapMutations(['updateValue', 'removeLastDigit', 'updateSymbol', 'resetState']),
+    ...mapMutations([
+      'updateValue',
+      'removeLastDigit',
+      'updateSymbol',
+      'resetState'
+    ]),
 
     ...mapActions(['shuffleArray']),
 
     randomSymbol () {
-      const randomSymbol = this.computations[this.random(1, (this.computationsLength + 1)) - 1]
+      const randomSymbol = this.operations[this.random(1, (this.operationsLength + 1)) - 1]
 
       this.updateSymbol(randomSymbol)
     },

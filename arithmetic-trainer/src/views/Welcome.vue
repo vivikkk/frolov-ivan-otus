@@ -15,7 +15,7 @@
           <DifficultySettings/>
         </v-col>
         <v-col cols="5">
-          <ComputationsSettings/>
+          <OperationsSettings/>
         </v-col>
       </v-row>
     </v-container>
@@ -23,13 +23,13 @@
     <v-container>
         <v-btn
           to="/game"
-          :disabled="!isNotEmptyComputations"
+          :disabled="!isNotEmptyOperations"
           class="mt-8 mb-6"
           x-large
           color="primary">
           <v-avatar
             class="mr-2"
-            :class="{'avatar_disabled': !isNotEmptyComputations}"
+            :class="{'avatar_disabled': !isNotEmptyOperations}"
             size="32px">
             <img src="https://94info.com/upload/images/users/small/20190222172656957.jpg">
           </v-avatar>
@@ -43,7 +43,7 @@
 import Splash from '../components/Splash'
 import DurationSettings from '../components/settingsComponents/DurationSettings'
 import DifficultySettings from '../components/settingsComponents/DifficultySettings'
-import ComputationsSettings from '../components/settingsComponents/ComputationsSettings'
+import OperationsSettings from '../components/settingsComponents/OperationsSettings'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -53,10 +53,15 @@ export default {
     Splash,
     DurationSettings,
     DifficultySettings,
-    ComputationsSettings
+    OperationsSettings
   },
 
-  computed: mapGetters(['computations', 'isNotEmptyComputations'])
+  computed: {
+    ...mapGetters([
+      'operations',
+      'isNotEmptyOperations'
+    ])
+  }
 }
 </script>
 
