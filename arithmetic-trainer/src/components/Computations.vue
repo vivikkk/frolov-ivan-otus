@@ -1,5 +1,7 @@
 <template>
-  <v-col cols="2">
+  <v-col
+    sm="3"
+    lg="3">
     <v-btn
       @click="$emit('remove-symbol')"
       class="mx-auto mb-4"

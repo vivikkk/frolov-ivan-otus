@@ -1,8 +1,9 @@
 const getDefaultState = () => {
   return {
-    currentValue: '',
     numbers: [],
-    currentSymbol: ''
+    currentValue: '',
+    currentSymbol: '',
+    correctAnswer: 0
   }
 }
 
@@ -19,6 +20,10 @@ const getters = {
 
   symbol (state) {
     return state.currentSymbol
+  },
+
+  correctAnswer (state) {
+    return state.correctAnswer
   }
 }
 
@@ -27,6 +32,21 @@ const actions = {
     const shuffledArray = arr.sort(() => Math.random() - 0.5)
 
     commit('updateNumbers', shuffledArray)
+  },
+
+  counting ({ commit }) {
+    let result = 0
+
+    switch (this.getters.symbol) {
+      case '+':
+        result = this.getters.numbers.reduce((a, b) => a + b)
+        break
+      case '*':
+        result = this.getters.numbers.reduce((a, b) => a * b)
+        break
+    }
+
+    commit('updateCorrectAnswer', result)
   }
 }
 
@@ -37,6 +57,10 @@ const mutations = {
 
   updateNumbers (state, arr) {
     state.numbers = arr
+  },
+
+  updateCorrectAnswer (state, num) {
+    state.correctAnswer = num
   },
 
   removeLastDigit (state) {

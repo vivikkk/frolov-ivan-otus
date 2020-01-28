@@ -63,12 +63,17 @@ export default {
     }
   },
 
+  created () {
+    this.resetState()
+  },
+
   mounted () {
     if (!this.isNotEmptyOperations) {
       this.$router.push('/')
     } else {
       this.randomDigits()
       this.randomSymbol()
+      this.counting()
     }
   },
 
@@ -80,7 +85,8 @@ export default {
       'isNotEmptyOperations',
       'value',
       'symbol',
-      'numbers'
+      'numbers',
+      'correctAnswer'
     ])
   },
 
@@ -92,7 +98,7 @@ export default {
       'resetState'
     ]),
 
-    ...mapActions(['shuffleArray']),
+    ...mapActions(['shuffleArray', 'counting']),
 
     randomSymbol () {
       const randomSymbol = this.operations[this.random(1, (this.operationsLength + 1)) - 1]
@@ -109,13 +115,13 @@ export default {
           this.shuffleArray([this.random(1, 100), this.random()])
           break
         case 3:
-          this.shuffleArray([this.random(1, 100), this.random(1, 100)])
+          this.shuffleArray([this.random(1, 50), this.random(1, 50)])
           break
       }
     },
 
     digitsInput (num) {
-      this.updateValue(num)
+      if (this.value.length < 4) this.updateValue(num)
     },
 
     removeSymbol () {
@@ -124,12 +130,12 @@ export default {
       }
     },
 
-    random (min = 1, max = 10) {
+    random (min = 2, max = 10) {
       return Math.floor(Math.random() * (max - min)) + min
     },
 
     endGame () {
-      this.$router.push('/')
+      this.$router.push({ name: 'Welcome' })
       this.resetState()
     }
   }
