@@ -71,7 +71,7 @@ const mutations = {
     state.currentSymbol = symbol
   },
 
-  resetState (state) {
+  resetGameState (state) {
     Object.assign(state, getDefaultState())
   }
 }

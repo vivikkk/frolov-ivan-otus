@@ -2,7 +2,7 @@
   <v-container v-if="isNotEmptyOperations">
     <v-row class="justify-space-between">
       <v-col cols="3">
-        <v-btn @click="endGame()" large color="primary">
+        <v-btn to='/' large color="primary">
           <v-icon dark>mdi-close</v-icon>
           <span>Отмена</span>
         </v-btn>
@@ -11,18 +11,9 @@
       <v-col cols="2">
         <Timer/>
       </v-col>
-
-      <v-snackbar
-        :timeout="timeout"
-        color="success"
-        right
-        bottom
-        v-model="snackbar">
-        <span>+1</span>
-      </v-snackbar>
     </v-row>
 
-    <v-row class="display-3 mt-8 justify-center">
+    <v-row class="display-3 mt-8">
       <v-col cols="10" class="d-flex justify-center">
         <Calculations
           :numbers="numbers"
@@ -34,8 +25,20 @@
 
     <v-row class="mt-8 justify-center">
       <Digits @click-digits="digitsInput"/>
-      <Computations @remove-symbol="removeSymbol"/>
+      <Computations
+        @remove-symbol="removeSymbol"
+        @check-answer="checkAnswer"
+      />
     </v-row>
+
+    <v-snackbar
+      v-model="showSnackbar"
+      :timeout="timeout"
+      :color="isTrueAnswer ? 'success' : 'error'"
+      center
+      bottom>
+      <span>{{ getMessage }}</span>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -58,13 +61,15 @@ export default {
 
   data () {
     return {
-      snackbar: false,
-      timeout: 2000
+      showSnackbar: false,
+      isTrueAnswer: false,
+      timeout: 1500
     }
   },
 
   created () {
-    this.resetState()
+    this.resetGameState()
+    this.resetGameCount()
   },
 
   mounted () {
@@ -87,7 +92,11 @@ export default {
       'symbol',
       'numbers',
       'correctAnswer'
-    ])
+    ]),
+
+    getMessage () {
+      return this.isTrueAnswer ? '+1 Правильный ответ' : 'Очень жаль =('
+    }
   },
 
   methods: {
@@ -95,10 +104,16 @@ export default {
       'updateValue',
       'removeLastDigit',
       'updateSymbol',
-      'resetState'
+      'resetGameState',
+      'resetGameCount'
     ]),
 
-    ...mapActions(['shuffleArray', 'counting']),
+    ...mapActions([
+      'shuffleArray',
+      'counting',
+      'addCurrentGameCount',
+      'addCorrectAnswersCount'
+    ]),
 
     randomSymbol () {
       const randomSymbol = this.operations[this.random(1, (this.operationsLength + 1)) - 1]
@@ -112,10 +127,10 @@ export default {
           this.shuffleArray([this.random(), this.random()])
           break
         case 2:
-          this.shuffleArray([this.random(1, 100), this.random()])
+          this.shuffleArray([this.random(2, 100), this.random()])
           break
         case 3:
-          this.shuffleArray([this.random(1, 50), this.random(1, 50)])
+          this.shuffleArray([this.random(2, 50), this.random(2, 50)])
           break
       }
     },
@@ -130,13 +145,25 @@ export default {
       }
     },
 
-    random (min = 2, max = 10) {
-      return Math.floor(Math.random() * (max - min)) + min
+    checkAnswer (bool) {
+      if ((this.correctAnswer === Number(this.value)) && bool) {
+        this.showSnackbar = true
+        this.isTrueAnswer = true
+        this.addCorrectAnswersCount()
+      } else {
+        this.showSnackbar = true
+        this.isTrueAnswer = false
+      }
+
+      this.resetGameState()
+      this.addCurrentGameCount()
+      this.randomDigits()
+      this.randomSymbol()
+      this.counting()
     },
 
-    endGame () {
-      this.$router.push({ name: 'Welcome' })
-      this.resetState()
+    random (min = 2, max = 10) {
+      return Math.floor(Math.random() * (max - min)) + min
     }
   }
 }
