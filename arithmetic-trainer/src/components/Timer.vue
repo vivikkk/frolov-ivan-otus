@@ -6,7 +6,7 @@
       outlined
       flat
       tile>
-      <span>{{ currentTimer | timeParser }}</span>
+      <span>{{ timer | timeParser }}</span>
     </v-card>
 
     <v-progress-linear
@@ -19,55 +19,26 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Timer',
 
-  data () {
-    return {
-      durationInSeconds: 0,
-      currentTimer: 0,
-      interval: null
-    }
-  },
-
-  beforeMount () {
-    this.durationInSeconds = this.duration * 60
-    this.currentTimer = this.durationInSeconds
-  },
-
-  mounted () {
-    this.interval = setInterval(() => {
-      if (this.currentTimer > 50) {
-        this.currentTimer--
-      } else {
-        clearInterval(this.interval)
-        this.isEnd()
-      }
-    }, 1000)
-  },
-
   computed: {
     ...mapGetters([
-      'duration'
+      'duration',
+      'timer'
     ]),
 
     getColorOfTimer () {
       const alarmTime = 10
 
-      return this.currentTimer > alarmTime ? 'light-blue' : 'red darken-2'
+      return this.timer > alarmTime ? 'light-blue' : 'red darken-2'
     },
 
     getPercentOfTimer () {
-      return 100 - Math.floor(this.currentTimer / this.durationInSeconds * 100)
+      return 100 - Math.floor(this.timer / (this.duration * 60) * 100)
     }
-  },
-
-  methods: mapMutations(['isEnd']),
-
-  beforeDestroy () {
-    clearInterval(this.interval)
   }
 }
 </script>

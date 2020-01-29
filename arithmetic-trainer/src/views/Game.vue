@@ -66,15 +66,18 @@ export default {
     return {
       showSnackbar: false,
       isTrueAnswer: false,
+      interval: null,
       timeout: 1500
     }
+  },
+
+  beforeMount () {
+    this.restartGame()
   },
 
   mounted () {
     if (!this.isNotEmptyOperations) {
       this.$router.push('/')
-    } else {
-      this.restartGame()
     }
   },
 
@@ -87,7 +90,9 @@ export default {
       'value',
       'symbol',
       'numbers',
-      'correctAnswer'
+      'correctAnswer',
+      'duration',
+      'timer'
     ]),
 
     getMessage () {
@@ -101,14 +106,17 @@ export default {
       'removeLastDigit',
       'updateSymbol',
       'resetGameState',
-      'resetGameCount'
+      'resetLastGameStat',
+      'updateTimer',
+      'isEnd'
     ]),
 
     ...mapActions([
       'shuffleArray',
       'counting',
       'addCurrentGameCount',
-      'addCorrectAnswersCount'
+      'addCorrectAnswersCount',
+      'changeTimer'
     ]),
 
     randomSymbol () {
@@ -151,7 +159,6 @@ export default {
         this.isTrueAnswer = false
       }
 
-      this.resetGameState()
       this.addCurrentGameCount()
       this.randomDigits()
       this.randomSymbol()
@@ -159,16 +166,39 @@ export default {
     },
 
     restartGame () {
-      this.resetGameState()
-      this.resetGameCount()
+      const durationInSeconds = this.duration * 60
+
+      this.updateTimer(durationInSeconds)
+      this.isEnd(false)
+      this.resetLastGameStat()
       this.randomDigits()
       this.randomSymbol()
       this.counting()
+      this.playGame()
+    },
+
+    playGame () {
+      this.interval = setInterval(() => {
+        if (this.timer > 0) {
+          this.changeTimer()
+        } else {
+          this.stopGame()
+        }
+      }, 1000)
+    },
+
+    stopGame () {
+      this.isEnd()
+      clearInterval(this.interval)
     },
 
     random (min = 2, max = 10) {
       return Math.floor(Math.random() * (max - min)) + min
     }
+  },
+
+  beforeDestroy () {
+    clearInterval(this.interval)
   }
 }
 </script>

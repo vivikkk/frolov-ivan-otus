@@ -4,7 +4,8 @@ const getDefaultState = () => {
     currentValue: '',
     currentSymbol: '',
     correctAnswer: 0,
-    isEnd: false
+    isEnd: false,
+    timer: 0
   }
 }
 
@@ -25,6 +26,10 @@ const getters = {
 
   correctAnswer (state) {
     return state.correctAnswer
+  },
+
+  timer (state) {
+    return state.timer
   },
 
   isEnd (state) {
@@ -52,6 +57,13 @@ const actions = {
     }
 
     commit('updateCorrectAnswer', result)
+    commit('resetCurrentValue')
+  },
+
+  changeTimer ({ commit }) {
+    const time = this.getters.timer - 1
+
+    commit('updateTimer', time)
   }
 }
 
@@ -76,12 +88,20 @@ const mutations = {
     state.currentSymbol = symbol
   },
 
+  updateTimer (state, time) {
+    state.timer = time
+  },
+
+  resetCurrentValue (state) {
+    state.currentValue = ''
+  },
+
   resetGameState (state) {
     Object.assign(state, getDefaultState())
   },
 
-  isEnd (state) {
-    state.isEnd = true
+  isEnd (state, bool = true) {
+    state.isEnd = bool
   }
 }
 

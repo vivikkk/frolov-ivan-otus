@@ -1,5 +1,4 @@
 const state = {
-  day: 1,
   gameCount: 0,
   gameCorrectAnswersCount: 0
 }
@@ -41,7 +40,7 @@ const mutations = {
     state.gameCorrectAnswersCount = num
   },
 
-  resetGameCount (state) {
+  resetLastGameStat (state) {
     state.gameCount = 0
     state.gameCorrectAnswersCount = 0
   }
