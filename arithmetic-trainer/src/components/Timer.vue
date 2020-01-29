@@ -37,7 +37,9 @@ export default {
     },
 
     getPercentOfTimer () {
-      return 100 - Math.floor(this.timer / (this.duration * 60) * 100)
+      const durationInSeconds = this.duration * 60
+
+      return 100 - Math.floor(this.timer / durationInSeconds * 100)
     }
   }
 }

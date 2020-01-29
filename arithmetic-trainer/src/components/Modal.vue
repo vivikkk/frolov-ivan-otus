@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isEnd" persistent max-width="500">
+  <v-dialog v-model="showModal" persistent max-width="500">
     <v-card>
       <v-card-title class="headline">Конец игры.</v-card-title>
       <v-card-text>
@@ -22,7 +22,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters([
-    'isEnd',
+    'showModal',
     'gameCount',
     'gameCorrectAnswers'
   ])

@@ -20,22 +20,10 @@ export default {
   data () {
     return {
       operations: [
-        {
-          label: 'Суммирование',
-          value: '+'
-        },
-        {
-          label: 'Умножение',
-          value: '*'
-        },
-        {
-          label: 'Разность',
-          value: '-'
-        },
-        {
-          label: 'Деление',
-          value: '/'
-        }
+        { label: 'Суммирование', value: '+' },
+        { label: 'Умножение', value: '*' },
+        { label: 'Разность', value: '-' },
+        { label: 'Деление', value: '/' }
       ]
     }
   },

@@ -77,7 +77,7 @@ export default {
 
   mounted () {
     if (!this.isNotEmptyOperations) {
-      this.$router.push('/')
+      this.$router.push({ name: 'Welcome' })
     }
   },
 
@@ -107,7 +107,7 @@ export default {
       'resetGameState',
       'resetLastGameStat',
       'updateTimer',
-      'isEnd',
+      'showModal',
       'updateGlobalStat',
       'updateAccuracy',
       'updateData'
@@ -167,7 +167,7 @@ export default {
       const durationInSeconds = this.duration * 60
 
       this.updateTimer(durationInSeconds)
-      this.isEnd(false)
+      this.showModal(false)
       this.resetLastGameStat()
       this.playGame()
       this.startTimer()
@@ -186,7 +186,7 @@ export default {
     },
 
     stopGame () {
-      this.isEnd()
+      this.showModal()
       clearInterval(this.interval)
     },
 

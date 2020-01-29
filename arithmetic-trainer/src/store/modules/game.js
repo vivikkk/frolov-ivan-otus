@@ -4,7 +4,7 @@ const getDefaultState = () => {
     currentValue: '',
     symbol: '',
     correctAnswer: 0,
-    isEnd: false,
+    showModal: false,
     timer: 0
   }
 }
@@ -32,8 +32,8 @@ const getters = {
     return state.timer
   },
 
-  isEnd (state) {
-    return state.isEnd
+  showModal (state) {
+    return state.showModal
   }
 }
 
@@ -100,8 +100,8 @@ const mutations = {
     Object.assign(state, getDefaultState())
   },
 
-  isEnd (state, bool = true) {
-    state.isEnd = bool
+  showModal (state, bool = true) {
+    state.showModal = bool
   }
 }
 
