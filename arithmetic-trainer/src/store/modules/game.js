@@ -3,7 +3,8 @@ const getDefaultState = () => {
     numbers: [],
     currentValue: '',
     currentSymbol: '',
-    correctAnswer: 0
+    correctAnswer: 0,
+    isEnd: false
   }
 }
 
@@ -24,6 +25,10 @@ const getters = {
 
   correctAnswer (state) {
     return state.correctAnswer
+  },
+
+  isEnd (state) {
+    return state.isEnd
   }
 }
 
@@ -73,6 +78,10 @@ const mutations = {
 
   resetGameState (state) {
     Object.assign(state, getDefaultState())
+  },
+
+  isEnd (state) {
+    state.isEnd = true
   }
 }
 

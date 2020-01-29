@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Timer',
@@ -39,12 +39,19 @@ export default {
 
   mounted () {
     this.interval = setInterval(() => {
-      this.currentTimer--
+      if (this.currentTimer > 50) {
+        this.currentTimer--
+      } else {
+        clearInterval(this.interval)
+        this.isEnd()
+      }
     }, 1000)
   },
 
   computed: {
-    ...mapGetters(['duration']),
+    ...mapGetters([
+      'duration'
+    ]),
 
     getColorOfTimer () {
       const alarmTime = 10
@@ -56,6 +63,8 @@ export default {
       return 100 - Math.floor(this.currentTimer / this.durationInSeconds * 100)
     }
   },
+
+  methods: mapMutations(['isEnd']),
 
   beforeDestroy () {
     clearInterval(this.interval)

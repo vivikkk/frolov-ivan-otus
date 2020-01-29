@@ -39,6 +39,7 @@
       bottom>
       <span>{{ getMessage }}</span>
     </v-snackbar>
+    <Modal @restart-game="restartGame()"/>
   </v-container>
 </template>
 
@@ -47,6 +48,7 @@ import Timer from '../components/Timer'
 import Calculations from '../components/Calculations'
 import Computations from '../components/Computations'
 import Digits from '../components/Digits'
+import Modal from '../components/Modal'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
@@ -56,7 +58,8 @@ export default {
     Timer,
     Calculations,
     Digits,
-    Computations
+    Computations,
+    Modal
   },
 
   data () {
@@ -67,18 +70,11 @@ export default {
     }
   },
 
-  created () {
-    this.resetGameState()
-    this.resetGameCount()
-  },
-
   mounted () {
     if (!this.isNotEmptyOperations) {
       this.$router.push('/')
     } else {
-      this.randomDigits()
-      this.randomSymbol()
-      this.counting()
+      this.restartGame()
     }
   },
 
@@ -157,6 +153,14 @@ export default {
 
       this.resetGameState()
       this.addCurrentGameCount()
+      this.randomDigits()
+      this.randomSymbol()
+      this.counting()
+    },
+
+    restartGame () {
+      this.resetGameState()
+      this.resetGameCount()
       this.randomDigits()
       this.randomSymbol()
       this.counting()
