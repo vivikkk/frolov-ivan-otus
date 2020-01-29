@@ -1,19 +1,30 @@
 const state = {
   gameCount: 0,
-  gameCorrectAnswersCount: 0
+  gameCorrectAnswers: 0,
+  globalCount: 0,
+  globalCorrectAnswers: 0,
+  accuracy: 0
 }
 
 const getters = {
-  day (state) {
-    return state.day
-  },
-
   gameCount (state) {
     return state.gameCount
   },
 
-  gameCorrectAnswersCount (state) {
-    return state.gameCorrectAnswersCount
+  gameCorrectAnswers (state) {
+    return state.gameCorrectAnswers
+  },
+
+  globalCount (state) {
+    return state.globalCount
+  },
+
+  globalCorrectAnswers (state) {
+    return state.globalCorrectAnswers
+  },
+
+  accuracy (state) {
+    return state.accuracy
   }
 }
 
@@ -25,7 +36,7 @@ const actions = {
   },
 
   addCorrectAnswersCount ({ commit }) {
-    const count = this.getters.gameCorrectAnswersCount + 1
+    const count = this.getters.gameCorrectAnswers + 1
 
     commit('updateCorrectAnswersCount', count)
   }
@@ -37,12 +48,21 @@ const mutations = {
   },
 
   updateCorrectAnswersCount (state, num) {
-    state.gameCorrectAnswersCount = num
+    state.gameCorrectAnswers = num
   },
 
   resetLastGameStat (state) {
     state.gameCount = 0
-    state.gameCorrectAnswersCount = 0
+    state.gameCorrectAnswers = 0
+  },
+
+  updateGlobalStat (state) {
+    state.globalCount = this.getters.globalCount + this.getters.gameCount
+    state.globalCorrectAnswers = this.getters.globalCorrectAnswers + this.getters.gameCorrectAnswers
+  },
+
+  updateAccuracy (state) {
+    state.accuracy = Math.floor(this.getters.globalCorrectAnswers / this.getters.globalCount * 100)
   }
 }
 

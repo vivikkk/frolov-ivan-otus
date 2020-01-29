@@ -6,7 +6,7 @@
         <strong>Всего вопросов:</strong> {{ gameCount }}
       </v-card-text>
       <v-card-text>
-        <strong>Правильных ответов:</strong> {{ gameCorrectAnswersCount }}
+        <strong>Правильных ответов:</strong> {{ gameCorrectAnswers }}
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -24,7 +24,7 @@ export default {
   computed: mapGetters([
     'isEnd',
     'gameCount',
-    'gameCorrectAnswersCount'
+    'gameCorrectAnswers'
   ])
 }
 </script>

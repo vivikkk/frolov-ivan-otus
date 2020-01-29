@@ -108,7 +108,9 @@ export default {
       'resetGameState',
       'resetLastGameStat',
       'updateTimer',
-      'isEnd'
+      'isEnd',
+      'updateGlobalStat',
+      'updateAccuracy'
     ]),
 
     ...mapActions([
@@ -179,10 +181,12 @@ export default {
 
     playGame () {
       this.interval = setInterval(() => {
-        if (this.timer > 0) {
+        if (this.timer > 50) {
           this.changeTimer()
         } else {
           this.stopGame()
+          this.updateGlobalStat()
+          this.updateAccuracy()
         }
       }, 1000)
     },

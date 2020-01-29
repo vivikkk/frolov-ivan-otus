@@ -36,10 +36,6 @@ export default {
         {
           label: 'Деление',
           value: '/'
-        },
-        {
-          label: 'Возведение в степень',
-          value: 'ˆ'
         }
       ]
     }
