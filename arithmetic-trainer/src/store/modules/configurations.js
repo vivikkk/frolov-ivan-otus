@@ -1,7 +1,7 @@
 const state = {
   duration: 1,
   difficulty: 1,
-  operations: ['+', '*']
+  operations: []
 }
 
 const getters = {
@@ -21,8 +21,8 @@ const getters = {
     return state.operations.length
   },
 
-  isNotEmptyOperations () {
-    return !!getters.operationsLength
+  isNotEmptyOperations (state) {
+    return !!state.operations.length
   }
 }
 

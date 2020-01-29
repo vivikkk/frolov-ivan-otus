@@ -35,7 +35,8 @@ export default {
 }
 
 .placeholder {
-  min-width: 50px
+  min-width: 50px;
+  height: 60px;
 }
 
 .placeholder_border {

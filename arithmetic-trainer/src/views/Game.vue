@@ -104,41 +104,39 @@ export default {
     ...mapMutations([
       'updateValue',
       'removeLastDigit',
-      'updateSymbol',
       'resetGameState',
       'resetLastGameStat',
       'updateTimer',
       'isEnd',
       'updateGlobalStat',
-      'updateAccuracy'
+      'updateAccuracy',
+      'updateData'
     ]),
 
     ...mapActions([
-      'shuffleArray',
       'counting',
       'addCurrentGameCount',
       'addCorrectAnswersCount',
       'changeTimer'
     ]),
 
-    randomSymbol () {
-      const randomSymbol = this.operations[this.random(1, (this.operationsLength + 1)) - 1]
+    playGame () {
+      let randomSymbol = this.operations[this.random(1, (this.operationsLength + 1)) - 1]
+      let shuffledArray = []
 
-      this.updateSymbol(randomSymbol)
-    },
-
-    randomDigits () {
       switch (this.difficulty) {
         case 1:
-          this.shuffleArray([this.random(), this.random()])
+          shuffledArray = [this.random(), this.random()].sort(() => Math.random() - 0.5)
           break
         case 2:
-          this.shuffleArray([this.random(2, 100), this.random()])
+          shuffledArray = [this.random(2, 20), this.random()].sort(() => Math.random() - 0.5)
           break
         case 3:
-          this.shuffleArray([this.random(2, 50), this.random(2, 50)])
+          shuffledArray = [this.random(2, 50), this.random(2, 50)].sort(() => Math.random() - 0.5)
           break
       }
+
+      this.counting({ shuffledArray, randomSymbol })
     },
 
     digitsInput (num) {
@@ -162,9 +160,7 @@ export default {
       }
 
       this.addCurrentGameCount()
-      this.randomDigits()
-      this.randomSymbol()
-      this.counting()
+      this.playGame()
     },
 
     restartGame () {
@@ -173,15 +169,13 @@ export default {
       this.updateTimer(durationInSeconds)
       this.isEnd(false)
       this.resetLastGameStat()
-      this.randomDigits()
-      this.randomSymbol()
-      this.counting()
       this.playGame()
+      this.startTimer()
     },
 
-    playGame () {
+    startTimer () {
       this.interval = setInterval(() => {
-        if (this.timer > 50) {
+        if (this.timer > 0) {
           this.changeTimer()
         } else {
           this.stopGame()

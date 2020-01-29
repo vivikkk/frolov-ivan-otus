@@ -7,7 +7,6 @@
       class="mb-n6"
       color="primary"
       v-model="selected"
-      :disabled="isDisable(item.value)"
       :label="item.label"
       :value="item.value">
     </v-checkbox>
@@ -38,14 +37,6 @@ export default {
           value: '/'
         }
       ]
-    }
-  },
-
-  methods: {
-    isDisable (val) {
-      const activeArr = ['+', '*']
-
-      return !activeArr.some(item => item === val)
     }
   },
 
