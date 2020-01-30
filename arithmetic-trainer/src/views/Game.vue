@@ -129,10 +129,10 @@ export default {
           shuffledArray = [this.random(), this.random()].sort(() => Math.random() - 0.5)
           break
         case 2:
-          shuffledArray = [this.random(2, 20), this.random()].sort(() => Math.random() - 0.5)
+          shuffledArray = [this.random(10, 21), this.random()].sort(() => Math.random() - 0.5)
           break
         case 3:
-          shuffledArray = [this.random(2, 50), this.random(2, 50)].sort(() => Math.random() - 0.5)
+          shuffledArray = [this.random(2, 51), this.random(2, 21)].sort(() => Math.random() - 0.5)
           break
       }
 
