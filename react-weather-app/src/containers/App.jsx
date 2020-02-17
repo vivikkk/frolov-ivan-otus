@@ -1,26 +1,62 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import Input from '../components/Input';
 import Header from '../components/Header';
-import CitiesList from './AppContainer';
+import CityShort from '../components/CityShort';
+import CityFull from '../components/CityFull';
 import { getWeather } from '../actions/cityActions';
 import { addFavoriteCity } from '../actions/favoriteActions';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.searhChange = this.searhChange.bind(this);
+    this.favoriteStatusChange = this.favoriteStatusChange.bind(this);
+  }
+
+  searhChange(event) {
+    const searchInput = event.currentTarget.value;
+
+    this.props.weatherAction(searchInput);
+  }
+
+  favoriteStatusChange(id) {
+    this.props.favoriteCityAction(id);
+  }
+
   render() {
-    const { weatherAction, favoriteCityAction, city, favoriteCities} = this.props;
+    const { weatherAction, city, favoriteCities } = this.props;
 
     return(
-      <main>
-        <Header title="Weather APP" />
-        <CitiesList
-          isFetching={ city.isFetching }
-          weather={ city.weather }
-          getWeather={ weatherAction }
-          favoriteCities={ favoriteCities }
-          addFavoriteCity={ favoriteCityAction }
-        />
-      </main>
+      <Router>
+        <main>
+          <Header title="Weather APP" />
+          <Switch>
+            <Route exact path="/" render={props =>
+              <section>
+                <Input inputHandler = { this.searhChange } />
+                <br/>
+                <br/>
+                <CityShort
+                  favoriteStatusChange={ this.favoriteStatusChange }
+                  {...this.props}
+                />
+              </section>
+            }/>
+            <Route path="/:city" render={props =>
+              <CityFull
+                favoriteStatusChange={ this.favoriteStatusChange }
+                {...this.props}
+                {...props}
+              />
+            }/>
+          </Switch>
+        </main>
+      </Router>
     );
   }
 }
@@ -41,7 +77,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    weatherAction: city => dispatch(getWeather(city)),
+    weatherAction: (city, id) => dispatch(getWeather(city, id)),
     favoriteCityAction: id => dispatch(addFavoriteCity(id))
   }
 }
