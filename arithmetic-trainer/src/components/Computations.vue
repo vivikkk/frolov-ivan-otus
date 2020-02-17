@@ -1,48 +1,40 @@
 <template>
-  <v-col cols="1" class="d-flex flex-wrap justify-center">
-    <div class="d-flex flex-column justify-space-between">
-      <div
-        v-for="(item, index) in computations"
-        :key="index"
-      >
-        <v-btn
-          class="mx-auto"
-          color="red"
-          fab
-          dark
-        >
-          <span>{{ item.symbol }}</span>
-        </v-btn>
-      </div>
-    </div>
+  <v-col sm="3" lg="3">
+    <v-btn
+      @click="$emit('remove-symbol')"
+      class="mx-auto mb-4"
+      color="primary"
+      block
+      dark>
+      <span>ᐊ Стереть</span>
+    </v-btn>
+
+    <v-btn
+      @click="$emit('check-answer', true)"
+      class="mx-auto mb-4"
+      color="green"
+      block
+      dark>
+      <span>= Равно</span>
+    </v-btn>
+
+    <v-btn
+      @click="$emit('check-answer', false)"
+      class="mx-auto mb-4"
+      color="red"
+      block
+      dark>
+      <span>? Не знаю</span>
+    </v-btn>
   </v-col>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Computations',
 
-  data () {
-    return {
-      computations: [
-        {
-          symbol: '<',
-          value: '<'
-        },
-        {
-          symbol: '>',
-          value: '>'
-        },
-        {
-          symbol: '?',
-          value: '?'
-        },
-        {
-          symbol: '=',
-          value: '='
-        }
-      ]
-    }
-  }
+  computed: mapGetters(['value'])
 }
 </script>

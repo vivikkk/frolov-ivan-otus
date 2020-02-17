@@ -4,8 +4,12 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import { timeParser, declOfNum } from './filters'
 
 Vue.config.productionTip = false
+
+Vue.filter('timeParser', timeParser)
+Vue.filter('declOfNum', declOfNum)
 
 new Vue({
   router,

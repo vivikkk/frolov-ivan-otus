@@ -4,12 +4,10 @@
     <v-slider
       v-model="difficulty"
       min="1"
-      max="4"
-      tick-size="4"
-      :tick-labels="seasons"
+      max="3"
+      :tick-labels="level"
       :color="getDifficultColor"
-      ticks="always"
-    >
+      ticks>
     </v-slider>
   </div>
 </template>
@@ -18,23 +16,32 @@
 export default {
   name: 'DifficultySettings',
 
-  data: () => ({
-    difficulty: 2,
-    colors: [
-      '#EF9A9A',
-      '#EF5350',
-      '#D32F2F',
-      '#B71C1C'
-    ],
-    seasons: [
-      'Изян',
-      'Просто',
-      'Норм',
-      'Сложно'
-    ]
-  }),
+  data () {
+    return {
+      colors: [
+        'red lighten-3',
+        'red darken-2',
+        'red darken-4'
+      ],
+      level: [
+        'Изян',
+        'Просто',
+        'Сложно'
+      ]
+    }
+  },
 
   computed: {
+    difficulty: {
+      get () {
+        return this.$store.getters.difficulty
+      },
+
+      set (value) {
+        this.$store.commit('updateDifficulty', value)
+      }
+    },
+
     getDifficultColor () {
       return this.colors[this.difficulty - 1]
     }
